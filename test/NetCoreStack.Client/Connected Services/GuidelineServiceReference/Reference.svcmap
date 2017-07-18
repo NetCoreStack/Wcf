@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e2a2d73e-e386-47db-8c1f-752ee5122324" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:55512/GuidelineService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GuidelineService.xsd" MetadataType="Schema" ID="6016ac61-3d6d-4ea4-b0d3-8bcb7857d205" SourceId="1" SourceUrl="http://localhost:55512/GuidelineService.svc?xsd=xsd0" />
+    <MetadataFile FileName="GuidelineService.wsdl" MetadataType="Wsdl" ID="4b8eab96-c4eb-49dd-b3da-13d08683bd3a" SourceId="1" SourceUrl="http://localhost:55512/GuidelineService.svc?wsdl" />
+    <MetadataFile FileName="GuidelineService.disco" MetadataType="Disco" ID="181c4c99-a2b6-4223-bfea-70b063e6e998" SourceId="1" SourceUrl="http://localhost:55512/GuidelineService.svc?disco" />
+    <MetadataFile FileName="GuidelineService1.xsd" MetadataType="Schema" ID="f65dcbe9-c9c3-4326-911e-bdb48d0d88cd" SourceId="1" SourceUrl="http://localhost:55512/GuidelineService.svc?xsd=xsd1" />
+    <MetadataFile FileName="GuidelineService2.xsd" MetadataType="Schema" ID="3e7f9854-22b5-4e23-b442-d8b43e9559b1" SourceId="1" SourceUrl="http://localhost:55512/GuidelineService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

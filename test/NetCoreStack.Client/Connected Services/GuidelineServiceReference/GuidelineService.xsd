@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:55512/GuidelineService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" />
+  <xs:element name="ReturnPrimitive">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReturnPrimitiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ReturnPrimitiveResult" nillable="true" type="q1:ServiceResultOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefTypeParameter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="model" nillable="true" type="q2:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RefTypeParameterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="RefTypeParameterResult" nillable="true" type="q3:ServiceResultOfCompositeTypeF5mu15lW" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ThrowException">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ThrowExceptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowExceptionResult" nillable="true" type="q4:ServiceResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ThrowContractRuleException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requiredParam" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ThrowContractRuleExceptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowContractRuleExceptionResult" nillable="true" type="q5:ServiceResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
