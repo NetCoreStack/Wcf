@@ -54,6 +54,7 @@ namespace NetCoreStack.Wcf
 
                 var identityProvider = scope.ServiceProvider.GetService<IIdentityProvider>();
                 var invocationFilter = scope.ServiceProvider.GetService<IServiceInstanceInvokeFilter>();
+                var exceptionFilter = scope.ServiceProvider.GetService<IServiceMethodExceptionFilter>();
                 serviceBase.ApplicationServices = scope.ServiceProvider;
                 serviceBase.Principal = identityProvider?.Principal;
                 var callerId = identityProvider.Principal.Identity?.Name;
@@ -79,9 +80,7 @@ namespace NetCoreStack.Wcf
                         }
                         catch (Exception ex)
                         {
-                            if (ex?.InnerException != null)
-                                throw ex.InnerException;
-
+                            exceptionFilter?.Invoke(ex);
                             throw ex;
                         }
 
@@ -90,8 +89,17 @@ namespace NetCoreStack.Wcf
 
                     return returnObj;
                 }
+                
+                try
+                {
+                    returnObj = targetMethod.Invoke(instance, args);
+                }
+                catch (Exception ex)
+                {
+                    exceptionFilter?.Invoke(ex);
+                    throw ex;
+                }
 
-                returnObj = targetMethod.Invoke(instance, args);
                 if (serviceLog != null)
                 {
                     var serviceName = instance.GetType().Name;

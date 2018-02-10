@@ -2,13 +2,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using NetCoreStack.Wcf.Contracts;
+using NetCoreStack.Wcf.Hosting.Core;
 
 namespace NetCoreStack.Wcf.Hosting
 {
     public class Startup
     {
         private readonly IHostingEnvironment _env;
-        public IConfigurationRoot Configuration { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public Startup(IHostingEnvironment env)
         {
@@ -32,6 +33,7 @@ namespace NetCoreStack.Wcf.Hosting
             services.AddMemoryCache();
             services.AddNetCoreStackWcf(Configuration);
 
+            services.AddScoped<IServiceMethodExceptionFilter, ServiceMethodExceptionFilter>();
             services.AddScoped<SampleDependency>();
             services.AddScoped<IGuidelineService, GuidelineService>();
 

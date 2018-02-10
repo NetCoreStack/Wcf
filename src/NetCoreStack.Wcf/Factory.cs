@@ -32,7 +32,8 @@ namespace NetCoreStack.Wcf
 
             // overridable
             _services.TryAdd(ServiceDescriptor.Scoped<IIdentityProvider, DefaultIdentityProvider>());
-            
+            _services.TryAdd(ServiceDescriptor.Scoped<IServiceMethodExceptionFilter, DefaultServiceMethodExceptionFilter>());
+
             _methods.ConfigureServicesDelegate(_services);
             _methods.ConfigureDelegate(_appBuilder);
             ApplicationServices = _services.BuildServiceProvider();
