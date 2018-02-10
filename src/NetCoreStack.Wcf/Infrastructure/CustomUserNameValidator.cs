@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Selectors;
+using System.Linq;
 
 namespace NetCoreStack.Wcf
 {

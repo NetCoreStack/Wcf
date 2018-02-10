@@ -1,4 +1,9 @@
-﻿namespace NetCoreStack.Wcf.Hosting
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace NetCoreStack.Wcf.Hosting
 {
     public class SampleDependency
     {

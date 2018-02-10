@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharpRaven.Data;
+using System;
 using System.Reflection;
 
 namespace NetCoreStack.Wcf.Hosting.Core
@@ -17,6 +18,13 @@ namespace NetCoreStack.Wcf.Hosting.Core
             bool captured = false;
             try
             {
+                var sentryEvent = new SentryEvent(exception);
+                var identity = _identityProvider.Principal.Identity?.Name;
+
+                sentryEvent.Tags.Add("method", targetMethod.Name);
+                sentryEvent.Tags.Add("identity", identity);
+
+                HostingFactory.RavenClient.Capture(new SentryEvent(exception));
                 captured = true;
             }
             catch (Exception ex)
