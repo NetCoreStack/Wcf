@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Reflection;
 
 namespace NetCoreStack.Wcf
 {
     public interface IServiceMethodExceptionFilter
     {
-        void Invoke(Exception exception);
+        void Invoke(MethodInfo targetMethod, Exception exception);
     }
 }

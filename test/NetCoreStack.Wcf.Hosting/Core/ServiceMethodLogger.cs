@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 
-namespace NetCoreStack.Wcf
+namespace NetCoreStack.Wcf.Hosting.Core
 {
-    public class DefaultServiceLogger : IServiceLogger
+    public class ServiceMethodLogger : IServiceLogger
     {
         public void Invoke(string callerId, string serviceName, MethodInfo targetMethod, object args, object @return)
         {
-            
+
         }
     }
 }

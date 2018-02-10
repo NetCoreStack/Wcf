@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NetCoreStack.Contracts;
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -61,6 +63,37 @@ namespace NetCoreStack.Wcf
 
         public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
+            foreach (var svcEndPoint in serviceDescription.Endpoints)
+            {
+                // Don't check mex
+                if (!svcEndPoint.Contract.Name.Equals("IMetadataExchange", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    foreach (var opDesc in svcEndPoint.Contract.Operations)
+                    {
+                        // Operation contract has no faults associated with them
+                        if (opDesc.Faults.Count == 0)
+                        {
+                            string msg = string.Format(
+                               $"{nameof(CustomErrorHandlerBehavior)} requires a FaultContract(typeof(ServiceException))" +
+                                " on each operation contract. The {0} contains no FaultContracts.",
+                                opDesc.Name);
+                            throw new InvalidOperationException(msg);
+                        }
+                        // Operation contract has faults
+                        var fcExists = from fc in opDesc.Faults
+                                       where fc.DetailType == typeof(ServiceException)
+                                       select fc;
+                        // but not of our custom fault type
+                        if (fcExists.Count() == 0)
+                        {
+                            string msg =
+                                $"{nameof(CustomErrorHandlerBehavior)} requires a FaultContract(typeof(ServiceException)) " +
+                                " on each operation contract.";
+                            throw new InvalidOperationException(msg);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -9,25 +9,98 @@
 //------------------------------------------------------------------------------
 
 namespace NetCoreStack.Client.GuidelineServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
+    [System.SerializableAttribute()]
+    public partial class ServiceException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ErrorCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((this.ErrorCodeField.Equals(value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GuidelineServiceReference.IGuidelineService")]
     public interface IGuidelineService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/ReturnPrimitive", ReplyAction="http://tempuri.org/IGuidelineService/ReturnPrimitiveResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NetCoreStack.Client.GuidelineServiceReference.ServiceException), Action="http://tempuri.org/IGuidelineService/ReturnPrimitiveServiceExceptionFault", Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
         NetCoreStack.Wcf.Contracts.ServiceResult<int> ReturnPrimitive();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/ReturnPrimitive", ReplyAction="http://tempuri.org/IGuidelineService/ReturnPrimitiveResponse")]
         System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult<int>> ReturnPrimitiveAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/LoggedServiceMethod", ReplyAction="http://tempuri.org/IGuidelineService/LoggedServiceMethodResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NetCoreStack.Client.GuidelineServiceReference.ServiceException), Action="http://tempuri.org/IGuidelineService/LoggedServiceMethodServiceExceptionFault", Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
+        NetCoreStack.Wcf.Contracts.ServiceResult<int> LoggedServiceMethod(NetCoreStack.Wcf.Contracts.CompositeType parameter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/LoggedServiceMethod", ReplyAction="http://tempuri.org/IGuidelineService/LoggedServiceMethodResponse")]
+        System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult<int>> LoggedServiceMethodAsync(NetCoreStack.Wcf.Contracts.CompositeType parameter);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/RefTypeParameter", ReplyAction="http://tempuri.org/IGuidelineService/RefTypeParameterResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NetCoreStack.Client.GuidelineServiceReference.ServiceException), Action="http://tempuri.org/IGuidelineService/RefTypeParameterServiceExceptionFault", Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
         NetCoreStack.Wcf.Contracts.ServiceResult<NetCoreStack.Wcf.Contracts.CompositeType> RefTypeParameter(NetCoreStack.Wcf.Contracts.CompositeType model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/RefTypeParameter", ReplyAction="http://tempuri.org/IGuidelineService/RefTypeParameterResponse")]
         System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult<NetCoreStack.Wcf.Contracts.CompositeType>> RefTypeParameterAsync(NetCoreStack.Wcf.Contracts.CompositeType model);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/ThrowException", ReplyAction="http://tempuri.org/IGuidelineService/ThrowExceptionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NetCoreStack.Client.GuidelineServiceReference.ServiceException), Action="http://tempuri.org/IGuidelineService/ThrowExceptionServiceExceptionFault", Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NetCoreStack.Wcf.Contracts.ServiceResult<NetCoreStack.Wcf.Contracts.CompositeType>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NetCoreStack.Wcf.Contracts.ServiceResult<int>))]
         NetCoreStack.Wcf.Contracts.ServiceResult ThrowException();
@@ -36,6 +109,8 @@ namespace NetCoreStack.Client.GuidelineServiceReference {
         System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult> ThrowExceptionAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGuidelineService/ThrowContractRuleException", ReplyAction="http://tempuri.org/IGuidelineService/ThrowContractRuleExceptionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NetCoreStack.Client.GuidelineServiceReference.ServiceException), Action="http://tempuri.org/IGuidelineService/ThrowContractRuleExceptionServiceExceptionFa" +
+            "ult", Name="ServiceException", Namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NetCoreStack.Wcf.Contracts.ServiceResult<NetCoreStack.Wcf.Contracts.CompositeType>))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(NetCoreStack.Wcf.Contracts.ServiceResult<int>))]
         NetCoreStack.Wcf.Contracts.ServiceResult ThrowContractRuleException(long requiredParam);
@@ -77,6 +152,14 @@ namespace NetCoreStack.Client.GuidelineServiceReference {
         
         public System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult<int>> ReturnPrimitiveAsync() {
             return base.Channel.ReturnPrimitiveAsync();
+        }
+        
+        public NetCoreStack.Wcf.Contracts.ServiceResult<int> LoggedServiceMethod(NetCoreStack.Wcf.Contracts.CompositeType parameter) {
+            return base.Channel.LoggedServiceMethod(parameter);
+        }
+        
+        public System.Threading.Tasks.Task<NetCoreStack.Wcf.Contracts.ServiceResult<int>> LoggedServiceMethodAsync(NetCoreStack.Wcf.Contracts.CompositeType parameter) {
+            return base.Channel.LoggedServiceMethodAsync(parameter);
         }
         
         public NetCoreStack.Wcf.Contracts.ServiceResult<NetCoreStack.Wcf.Contracts.CompositeType> RefTypeParameter(NetCoreStack.Wcf.Contracts.CompositeType model) {

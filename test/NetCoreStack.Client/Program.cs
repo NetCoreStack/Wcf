@@ -7,7 +7,15 @@ namespace NetCoreStack.Client
     {
         static void Main(string[] args)
         {
-            ThrowException();   
+            CallLoggedMethod();   
+        }
+
+        private static void CallLoggedMethod()
+        {
+            GuidelineServiceReference.GuidelineServiceClient client = new GuidelineServiceReference.GuidelineServiceClient();
+            var serviceResult = client.LoggedServiceMethod(new CompositeType { BoolValue = true, Echo = "Echo client", StringValue = "Some string value!" });
+            Console.WriteLine(serviceResult.Result);
+            Console.ReadLine();
         }
 
         private static void CallRefTypeParameterOperation()

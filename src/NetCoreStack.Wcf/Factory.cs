@@ -30,9 +30,9 @@ namespace NetCoreStack.Wcf
             _services.AddOptions();
             _services.AddSingleton<IServiceInstanceInvokeFilter, DefaultServiceInstanceInvokeFilter>();
 
-            // overridable
             _services.TryAdd(ServiceDescriptor.Scoped<IIdentityProvider, DefaultIdentityProvider>());
             _services.TryAdd(ServiceDescriptor.Scoped<IServiceMethodExceptionFilter, DefaultServiceMethodExceptionFilter>());
+            _services.TryAdd(ServiceDescriptor.Scoped<IServiceLogger, DefaultServiceLogger>());
 
             _methods.ConfigureServicesDelegate(_services);
             _methods.ConfigureDelegate(_appBuilder);

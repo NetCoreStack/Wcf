@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NetCoreStack.Wcf
+﻿namespace NetCoreStack.Wcf
 {
     public class DefaultServiceInstanceInvokeFilter : IServiceInstanceInvokeFilter
     {

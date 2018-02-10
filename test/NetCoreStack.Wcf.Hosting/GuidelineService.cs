@@ -35,5 +35,10 @@ namespace NetCoreStack.Wcf.Hosting
         {
             throw new ArgumentNullException(nameof(ThrowException));
         }
+
+        public ServiceResult<int> LoggedServiceMethod(CompositeType parameter)
+        {
+            return new ServiceResult<int>(10);
+        }
     }
 }

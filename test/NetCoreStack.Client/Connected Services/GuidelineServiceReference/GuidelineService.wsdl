@@ -3,6 +3,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:55512/GuidelineService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:55512/GuidelineService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" />
       <xsd:import schemaLocation="http://localhost:55512/GuidelineService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:55512/GuidelineService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" />
     </xsd:schema>
@@ -13,11 +14,26 @@
   <wsdl:message name="IGuidelineService_ReturnPrimitive_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReturnPrimitiveResponse" />
   </wsdl:message>
+  <wsdl:message name="IGuidelineService_ReturnPrimitive_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" name="detail" element="q1:ServiceException" />
+  </wsdl:message>
+  <wsdl:message name="IGuidelineService_LoggedServiceMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoggedServiceMethod" />
+  </wsdl:message>
+  <wsdl:message name="IGuidelineService_LoggedServiceMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoggedServiceMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGuidelineService_LoggedServiceMethod_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" name="detail" element="q2:ServiceException" />
+  </wsdl:message>
   <wsdl:message name="IGuidelineService_RefTypeParameter_InputMessage">
     <wsdl:part name="parameters" element="tns:RefTypeParameter" />
   </wsdl:message>
   <wsdl:message name="IGuidelineService_RefTypeParameter_OutputMessage">
     <wsdl:part name="parameters" element="tns:RefTypeParameterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGuidelineService_RefTypeParameter_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" name="detail" element="q3:ServiceException" />
   </wsdl:message>
   <wsdl:message name="IGuidelineService_ThrowException_InputMessage">
     <wsdl:part name="parameters" element="tns:ThrowException" />
@@ -25,28 +41,43 @@
   <wsdl:message name="IGuidelineService_ThrowException_OutputMessage">
     <wsdl:part name="parameters" element="tns:ThrowExceptionResponse" />
   </wsdl:message>
+  <wsdl:message name="IGuidelineService_ThrowException_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" name="detail" element="q4:ServiceException" />
+  </wsdl:message>
   <wsdl:message name="IGuidelineService_ThrowContractRuleException_InputMessage">
     <wsdl:part name="parameters" element="tns:ThrowContractRuleException" />
   </wsdl:message>
   <wsdl:message name="IGuidelineService_ThrowContractRuleException_OutputMessage">
     <wsdl:part name="parameters" element="tns:ThrowContractRuleExceptionResponse" />
   </wsdl:message>
+  <wsdl:message name="IGuidelineService_ThrowContractRuleException_ServiceExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/NetCoreStack.Contracts" name="detail" element="q5:ServiceException" />
+  </wsdl:message>
   <wsdl:portType name="IGuidelineService">
     <wsdl:operation name="ReturnPrimitive">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuidelineService/ReturnPrimitive" message="tns:IGuidelineService_ReturnPrimitive_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuidelineService/ReturnPrimitiveResponse" message="tns:IGuidelineService_ReturnPrimitive_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuidelineService/ReturnPrimitiveServiceExceptionFault" name="ServiceExceptionFault" message="tns:IGuidelineService_ReturnPrimitive_ServiceExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoggedServiceMethod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGuidelineService/LoggedServiceMethod" message="tns:IGuidelineService_LoggedServiceMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGuidelineService/LoggedServiceMethodResponse" message="tns:IGuidelineService_LoggedServiceMethod_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuidelineService/LoggedServiceMethodServiceExceptionFault" name="ServiceExceptionFault" message="tns:IGuidelineService_LoggedServiceMethod_ServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RefTypeParameter">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuidelineService/RefTypeParameter" message="tns:IGuidelineService_RefTypeParameter_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuidelineService/RefTypeParameterResponse" message="tns:IGuidelineService_RefTypeParameter_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuidelineService/RefTypeParameterServiceExceptionFault" name="ServiceExceptionFault" message="tns:IGuidelineService_RefTypeParameter_ServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ThrowException">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuidelineService/ThrowException" message="tns:IGuidelineService_ThrowException_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuidelineService/ThrowExceptionResponse" message="tns:IGuidelineService_ThrowException_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuidelineService/ThrowExceptionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IGuidelineService_ThrowException_ServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="ThrowContractRuleException">
       <wsdl:input wsaw:Action="http://tempuri.org/IGuidelineService/ThrowContractRuleException" message="tns:IGuidelineService_ThrowContractRuleException_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGuidelineService/ThrowContractRuleExceptionResponse" message="tns:IGuidelineService_ThrowContractRuleException_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGuidelineService/ThrowContractRuleExceptionServiceExceptionFault" name="ServiceExceptionFault" message="tns:IGuidelineService_ThrowContractRuleException_ServiceExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGuidelineService" type="tns:IGuidelineService">
@@ -59,6 +90,21 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LoggedServiceMethod">
+      <soap:operation soapAction="http://tempuri.org/IGuidelineService/LoggedServiceMethod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="RefTypeParameter">
       <soap:operation soapAction="http://tempuri.org/IGuidelineService/RefTypeParameter" style="document" />
@@ -68,6 +114,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ThrowException">
       <soap:operation soapAction="http://tempuri.org/IGuidelineService/ThrowException" style="document" />
@@ -77,6 +126,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="ThrowContractRuleException">
       <soap:operation soapAction="http://tempuri.org/IGuidelineService/ThrowContractRuleException" style="document" />
@@ -86,6 +138,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceExceptionFault">
+        <soap:fault use="literal" name="ServiceExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GuidelineService">

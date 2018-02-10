@@ -1,6 +1,6 @@
 ﻿namespace NetCoreStack.Wcf.Hosting.App_Code
 {
-	public class ServiceInitializer
+    public class ServiceInitializer
     {
 		public static void AppInitialize()
 		{

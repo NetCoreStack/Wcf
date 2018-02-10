@@ -33,6 +33,7 @@ namespace NetCoreStack.Wcf.Hosting
             services.AddMemoryCache();
             services.AddNetCoreStackWcf(Configuration);
 
+            services.AddScoped<IServiceLogger, ServiceMethodLogger>();
             services.AddScoped<IServiceMethodExceptionFilter, ServiceMethodExceptionFilter>();
             services.AddScoped<SampleDependency>();
             services.AddScoped<IGuidelineService, GuidelineService>();

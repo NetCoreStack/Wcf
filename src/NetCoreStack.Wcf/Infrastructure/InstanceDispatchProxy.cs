@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using NetCoreStack.Contracts;
 using System;
 using System.Reflection;
 using System.Transactions;
@@ -80,7 +81,7 @@ namespace NetCoreStack.Wcf
                         }
                         catch (Exception ex)
                         {
-                            exceptionFilter?.Invoke(ex);
+                            exceptionFilter?.Invoke(targetMethod, ex);
                             throw ex;
                         }
 
@@ -96,7 +97,7 @@ namespace NetCoreStack.Wcf
                 }
                 catch (Exception ex)
                 {
-                    exceptionFilter?.Invoke(ex);
+                    exceptionFilter?.Invoke(targetMethod, ex);
                     throw ex;
                 }
 
@@ -104,7 +105,11 @@ namespace NetCoreStack.Wcf
                 {
                     var serviceName = instance.GetType().Name;
                     var serviceLogger = scope.ServiceProvider.GetService<IServiceLogger>();
-                    serviceLogger.Invoke(callerId, serviceName, targetMethod, args);
+                    serviceLogger.Invoke(callerId: callerId, 
+                        serviceName: serviceName, 
+                        targetMethod: targetMethod, 
+                        args: args, 
+                        @return: returnObj);
                 }
 
                 return returnObj;

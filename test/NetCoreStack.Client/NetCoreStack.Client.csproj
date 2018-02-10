@@ -64,6 +64,9 @@
     <None Include="Connected Services\GuidelineServiceReference\GuidelineService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\GuidelineServiceReference\GuidelineService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\NetCoreStack.Wcf.Contracts.CompositeType.datasource" />
     <None Include="Properties\DataSources\NetCoreStack.Wcf.Contracts.ServiceResult.datasource" />
   </ItemGroup>

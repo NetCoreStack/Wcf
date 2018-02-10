@@ -13,17 +13,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="LoggedServiceMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="parameter" nillable="true" type="q2:CompositeType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LoggedServiceMethodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="LoggedServiceMethodResult" nillable="true" type="q3:ServiceResultOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="RefTypeParameter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="model" nillable="true" type="q2:CompositeType" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="model" nillable="true" type="q4:CompositeType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RefTypeParameterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="RefTypeParameterResult" nillable="true" type="q3:ServiceResultOfCompositeTypeF5mu15lW" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="RefTypeParameterResult" nillable="true" type="q5:ServiceResultOfCompositeTypeF5mu15lW" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -35,7 +49,7 @@
   <xs:element name="ThrowExceptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowExceptionResult" nillable="true" type="q4:ServiceResult" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowExceptionResult" nillable="true" type="q6:ServiceResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -49,7 +63,7 @@
   <xs:element name="ThrowContractRuleExceptionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowContractRuleExceptionResult" nillable="true" type="q5:ServiceResult" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/NetCoreStack.Wcf.Contracts" minOccurs="0" name="ThrowContractRuleExceptionResult" nillable="true" type="q7:ServiceResult" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
