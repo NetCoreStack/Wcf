@@ -7,15 +7,23 @@ namespace NetCoreStack.Client
     {
         static void Main(string[] args)
         {
-            CallLoggedMethod();   
+            for (int i = 0; i < 2000000; i++)
+            {
+                CallLoggedMethod(i);
+                Console.WriteLine("Iteration: " + i);
+            }
         }
 
-        private static void CallLoggedMethod()
+        private static void CallLoggedMethod(int i)
         {
             GuidelineServiceReference.GuidelineServiceClient client = new GuidelineServiceReference.GuidelineServiceClient();
-            var serviceResult = client.LoggedServiceMethod(new CompositeType { BoolValue = true, Echo = "Echo client", StringValue = "Some string value!" });
-            Console.WriteLine(serviceResult.Result);
-            Console.ReadLine();
+            var serviceResult = client.LoggedServiceMethod(new CompositeType
+            {
+                BoolValue = true,
+                IntegerValue = i,
+                Echo = "Echo client " + i,
+                StringValue = "Some string value!"
+            });
         }
 
         private static void CallRefTypeParameterOperation()

@@ -9,6 +9,9 @@ namespace NetCoreStack.Wcf.Contracts
         public bool BoolValue { get; set; }
 
         [DataMember]
+        public int IntegerValue { get; set; }
+
+        [DataMember]
         public string StringValue { get; set; }
 
         [DataMember]

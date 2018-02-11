@@ -1,4 +1,5 @@
 ﻿using SharpRaven.Data;
+using System;
 using System.Reflection;
 
 namespace NetCoreStack.Wcf.Hosting.Core
@@ -7,14 +8,14 @@ namespace NetCoreStack.Wcf.Hosting.Core
     {
         private SentryMessage CreateSentryMessage(string serviceName, MethodInfo targetMethod)
         {
-            return new SentryMessage($"{serviceName}/{targetMethod.Name}");
+            return new SentryMessage($"{serviceName}/{targetMethod.Name}?uuid="+Guid.NewGuid().ToString("N"));
         }
 
         public void Invoke(string callerId, string serviceName, MethodInfo targetMethod, object args, object @return)
         {
             var sentryEvent = new SentryEvent(CreateSentryMessage(serviceName, targetMethod));
+            sentryEvent.Extra = new { method = targetMethod.Name, args, @return };
             sentryEvent.Tags.Add("method", targetMethod.Name);
-            sentryEvent.Tags.Add("identity", callerId);
             sentryEvent.Level = ErrorLevel.Info;
             HostingFactory.RavenClient.Capture(sentryEvent);
         }
