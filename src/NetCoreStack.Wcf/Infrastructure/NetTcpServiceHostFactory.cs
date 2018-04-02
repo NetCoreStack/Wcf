@@ -34,44 +34,41 @@ namespace NetCoreStack.Wcf
             var scheme = "net.tcp";
             var host = baseAddress.Host;
             var port = baseAddress.Port;
+            var pathAndQuery = baseAddress.PathAndQuery;
+            if (pathAndQuery.StartsWith("/"))
+            {
+                pathAndQuery = pathAndQuery.Substring(1);
+            }
 
-            endpoints.Add(new Uri($"{scheme}://{host}:{port}"));
+            endpoints.Add(new Uri($"{scheme}://{host}:{port}/{pathAndQuery}"));
+
             endpoints.AddRange(baseAddresses);
 
-            NetTcpServiceHost serviceHost = new NetTcpServiceHost(serviceType, endpoints.ToArray());
+            var serviceHost = new ServiceHost(serviceType, endpoints.ToArray());
 
-            serviceHost.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
+            // endpoint http
+            serviceHost.AddServiceEndpoint(interfaceType, new BasicHttpBinding(), "");
 
-            var hostAddress = serviceHost.BaseAddresses;
+            // endpoint net.tcp
+            var netTcpBinding = new NetTcpBinding(SecurityMode.None)
+            {
+                PortSharingEnabled = true,
+                MaxReceivedMessageSize = 1024 * 1024 * 10
+            };
+            serviceHost.AddServiceEndpoint(interfaceType, netTcpBinding, "");
 
+            // endpoint mex
             ServiceMetadataBehavior mexBehavior = serviceHost.Description.Behaviors.Find<ServiceMetadataBehavior>();
             if (mexBehavior != null)
             {
-                mexBehavior.HttpsGetEnabled = false;
                 mexBehavior.HttpGetEnabled = false;
+                mexBehavior.HttpsGetEnabled = false;
             }
 
-                // AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
+            serviceHost.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
+            serviceHost.AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
 
-                // var interfaceType = TypeHelper.GetFirstImmediateInterface(serviceType);
-
-
-                return serviceHost;
-        }
-    }
-
-    public class NetTcpServiceHost : CustomServiceHostBase
-    {
-        protected override string Address { get { return ""; } }
-
-        protected override Binding GetBinding()
-        {
-            return new NetTcpBinding(SecurityMode.None) { PortSharingEnabled = true };
-        }
-
-        public NetTcpServiceHost(Type serviceType, params Uri[] baseAddresses)
-            : base(serviceType, baseAddresses)
-        {
+            return serviceHost;
         }
     }
 }

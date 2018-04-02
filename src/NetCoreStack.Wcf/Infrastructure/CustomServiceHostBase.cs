@@ -20,18 +20,15 @@ namespace NetCoreStack.Wcf
             var interfaceType = serviceType.GetInterfaces().Except(new[] { typeof(IServiceBase), typeof(IDisposable) }).FirstOrDefault();
 
             var binding = GetBinding();
+
+            Description.Behaviors.Add(new CustomInstanceProvider(serviceType));
+
             if (binding is HttpBindingBase bindingBase)
             {
                 bindingBase.MaxReceivedMessageSize = maxReceivedMessageSize;
             }
 
-            if (binding is NetTcpBinding netTcpBinding)
-            {
-                netTcpBinding.MaxReceivedMessageSize = maxReceivedMessageSize;
-            }
-
-            ServiceEndpoint endpoint = this.AddServiceEndpoint(interfaceType, binding, Address);
-            Description.Behaviors.Add(new CustomInstanceProvider(serviceType));
+            this.AddServiceEndpoint(interfaceType, binding, Address);
         }
 
         //Overriding ApplyConfiguration() allows us to 
@@ -88,11 +85,6 @@ namespace NetCoreStack.Wcf
                 {
                     mexBehavior.HttpGetEnabled = true;
                     AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
-                }
-
-                if (baseAddress.Scheme == Uri.UriSchemeNetTcp)
-                {
-                    AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
                 }
             }
         }

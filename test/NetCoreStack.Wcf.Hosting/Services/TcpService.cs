@@ -1,17 +1,12 @@
 ﻿using NetCoreStack.Wcf.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace NetCoreStack.Wcf.Hosting
 {
     public class TcpService : ServiceBase, ITcpService
     {
-        public SampleDependency Dependency { get; }
-        public TcpService(SampleDependency dependency)
+        public TcpService()
         {
-            Dependency = dependency;
         }
 
         public ServiceResult<CompositeType> RefTypeParameter(CompositeType model)
