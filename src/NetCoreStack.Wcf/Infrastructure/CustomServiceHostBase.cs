@@ -8,20 +8,26 @@ namespace NetCoreStack.Wcf
 {
     public abstract class CustomServiceHostBase : ServiceHost
     {
-        protected static int SixtyFourMB = 64 * 1024 * 1024;
         protected abstract string Address { get; }
 
         protected abstract Binding GetBinding();
+
+        private static readonly int maxReceivedMessageSize = 1024 * 1024 * 10;
+
         public CustomServiceHostBase(Type serviceType, params Uri[] baseAddresses)
             : base(serviceType, baseAddresses)
         {
             var interfaceType = serviceType.GetInterfaces().Except(new[] { typeof(IServiceBase), typeof(IDisposable) }).FirstOrDefault();
 
             var binding = GetBinding();
-            var bindingBase = binding as HttpBindingBase;
-            if (bindingBase != null)
+            if (binding is HttpBindingBase bindingBase)
             {
-                bindingBase.MaxReceivedMessageSize = 1024 * 1024 * 7;
+                bindingBase.MaxReceivedMessageSize = maxReceivedMessageSize;
+            }
+
+            if (binding is NetTcpBinding netTcpBinding)
+            {
+                netTcpBinding.MaxReceivedMessageSize = maxReceivedMessageSize;
             }
 
             ServiceEndpoint endpoint = this.AddServiceEndpoint(interfaceType, binding, Address);
@@ -56,6 +62,7 @@ namespace NetCoreStack.Wcf
                 Description.Behaviors.Add(debugBehavior);
             }
             debugBehavior.IncludeExceptionDetailInFaults = true;
+
             //Now that we've populated the ServiceDescription, we can reach into it
             //and do interesting things (in this case, we'll add an instance of
             //ServiceMetadataBehavior if it's not already there.
@@ -80,9 +87,12 @@ namespace NetCoreStack.Wcf
                 if (baseAddress.Scheme == Uri.UriSchemeHttp || baseAddress.Scheme == Uri.UriSchemeHttps)
                 {
                     mexBehavior.HttpGetEnabled = true;
-                    AddServiceEndpoint(ServiceMetadataBehavior.MexContractName,
-                                            MetadataExchangeBindings.CreateMexHttpBinding(),
-                                            "mex");
+                    AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexHttpBinding(), "mex");
+                }
+
+                if (baseAddress.Scheme == Uri.UriSchemeNetTcp)
+                {
+                    AddServiceEndpoint(ServiceMetadataBehavior.MexContractName, MetadataExchangeBindings.CreateMexTcpBinding(), "mex");
                 }
             }
         }

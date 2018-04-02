@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A58CB4A9-FE5B-4D8B-9D21-F6D99629101E}</ProjectGuid>
+    <ProjectGuid>{C9B8AB53-9E08-4AB8-ADB7-257C5B13EC43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetCoreStack.Wcf.Contracts</RootNamespace>
-    <AssemblyName>NetCoreStack.Wcf.Contracts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>NetCoreStack.Wcf.Client</RootNamespace>
+    <AssemblyName>NetCoreStack.Wcf.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,10 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NetCoreStack.Contracts, Version=2.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NetCoreStack.Contracts.2.0.7\lib\netstandard2.0\NetCoreStack.Contracts.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -45,15 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositeType.cs" />
-    <Compile Include="ITcpService.cs" />
-    <Compile Include="MessageResultState.cs" />
-    <Compile Include="IGuidelineService.cs" />
+    <Compile Include="Configuration\ConfigurationSettingsManager.cs" />
+    <Compile Include="Configuration\CustomConfigurationSection.cs" />
+    <Compile Include="Configuration\ServiceEndPointSettingElement.cs" />
+    <Compile Include="Configuration\ServiceEndPointSettingsCollection.cs" />
+    <Compile Include="ExtendedChannelFactory.cs" />
+    <Compile Include="ExtendedRealProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceResult.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <Compile Include="ProxyHelper.cs" />
+    <Compile Include="Types\ClientMessageInspectorBehavior.cs" />
+    <Compile Include="Types\DefaultEndpointAddressResolver.cs" />
+    <Compile Include="Types\DefaultSurrogateBehavior.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
